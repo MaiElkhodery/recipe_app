@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+    <link rel="stylesheet" href="{% static 'recipe_style.css' %}">
+</head>
+<body>
+    <div class="recipe-grid">
+        {% for recipe in recipes %}
+            <div class="recipe-card" style="background-image: url('{{ recipe.picture.url }}');">
+                <a href= "{% url 'recipe_detail' recipe.id %}">{{ recipe.name }}</a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

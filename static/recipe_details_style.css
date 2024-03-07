@@ -1,0 +1,32 @@
+recipe-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: black; 
+    color: white;
+    font-family: 'Roboto', sans-serif; 
+}
+
+.recipe-image {
+    height: 500px;
+    background-size: 50% 50%;
+    background-position: center;
+    margin-bottom: 20px;
+}
+
+.recipe-content h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.recipe-content p {
+    margin-bottom: 10px;
+}
+
+.recipe-content ul {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.recipe-content ul li {
+    margin-bottom: 5px;
+}

@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ recipe.name }} Recipe</title>
+    <link rel="stylesheet" href="{% static 'recipe_details_style.css' %}"> 
+</head>
+<body>
+    <div class="recipe-detail">
+        <div class="recipe-image" style="background-image: url('{{ recipe.picture.url }}');"></div>
+        <div class="recipe-content">
+            <h1>{{ recipe.name }}</h1>
+            <p><strong>Category:</strong> {{ recipe.category }}</p>
+            <p><strong>Description:</strong> {{ recipe.description }}</p>
+            <p><strong>Time Cooked:</strong> {{ recipe.time_cooked }} minutes</p>
+            <h2>Ingredients</h2>
+            <ul>
+                {% for ingredient in recipe.ingredients.all %}
+                    <li>{{ ingredient.name }} - {{ ingredient.quantity }} {{ ingredient.unit }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
