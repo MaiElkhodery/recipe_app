@@ -30,11 +30,7 @@ class Migration(migrations.Migration):
             name='unit',
             field=models.CharField(choices=[('Grams', 'Grams'), ('Kilograms', 'Kilograms'), ('Milliliters', 'Milliliters'), ('Liters', 'Liters'), ('Teaspoons', 'Teaspoons'), ('Tablespoons', 'Tablespoons'), ('Cups', 'Cups'), ('Ounces', 'Ounces'), ('Pounds', 'Pounds'), ('Pieces', 'Pieces'), ('Slices', 'Slices'), ('Cloves', 'Cloves'), ('Pinches', 'Pinches'), ('Handfuls', 'Handfuls'), ('Drops', 'Drops')], max_length=20),
         ),
-        migrations.AlterField(
-            model_name='recipe',
-            name='ingredients',
-            field=models.ManyToManyField(related_name='recipe', to='recipe.ingredient'),
-        ),
+        
         migrations.DeleteModel(
             name='RecipeIngredient',
         ),

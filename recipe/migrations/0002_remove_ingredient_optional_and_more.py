@@ -35,13 +35,6 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity', models.FloatField(max_length=200)),
                 ('optional', models.BooleanField(default=False)),
-                ('ingredients', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='recipe.ingredient')),
-                ('recipe', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='recipe.recipe')),
             ],
-        ),
-        migrations.AlterField(
-            model_name='recipe',
-            name='ingredients',
-            field=models.ManyToManyField(through='recipe.RecipeIngredient', to='recipe.ingredient'),
-        ),
+        )
     ]
