@@ -40,44 +40,9 @@
                 <input type="number" id="id_time_cooked" name="time_cooked" class="form-input">
             </div>
 
-            <h2>Ingredients:</h2>
-            <div id="ingredients-container">
-                <div class="ingredient-form">
-                    <div class="form-group">
-                        <label for="id_ingredient_name">Name:</label>
-                        <input type="text" name="ingredient_name">
-                    </div>
-                    <div class="form-group">
-                        <label for="id_ingredient_unit">Unit:</label>
-                        <input type="text" name="ingredient_unit">
-                    </div>
-                    <div class="form-group">
-                        <label for="id_ingredient_quantity">Quantity:</label>
-                        <input type="text" name="ingredient_quantity">
-                    </div>
-                    <div class="form-group">
-                        <label for="id_ingredient_optional">Optional:</label>
-                        <input type="checkbox" name="ingredient_optional">
-                    </div>
-                </div>
-            </div>
-            <button type="button" id="add-ingredient-btn">Add Ingredient</button>
-
             <button type="submit" class="form-button">Submit</button>
         </form>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const addIngredientBtn = document.getElementById('add-ingredient-btn');
-            const ingredientsContainer = document.getElementById('ingredients-container');
-
-            addIngredientBtn.addEventListener('click', function() {
-                const ingredientForm = document.querySelector('.ingredient-form');
-                const clone = ingredientForm.cloneNode(true);
-                ingredientsContainer.appendChild(clone);
-            });
-        });
-    </script>
 </body>
 </html>

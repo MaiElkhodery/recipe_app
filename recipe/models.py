@@ -41,7 +41,7 @@ class Ingredient(models.Model):
     unit = models.CharField(max_length=20,choices=UNITS)
     quantity = models.FloatField(default=5)
     optional = models.BooleanField(default = False)  
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE,null = True)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
 
 
     def __str__(self):
