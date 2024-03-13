@@ -27,12 +27,9 @@
             <div class="form-field">
                 <label for="id_category" class="form-label">Category:</label>
                 <select id="id_category" name="category" class="form-input">
-                    <option value="dessert">Dessert</option>
-                    <option value="salad">Salad</option>
-                    <option value="appetizer">Appetizer</option>
-                    <option value="main_course">Main Course</option>
-                    <option value="side_dish">Side Dish</option>
-                    <option value="beverage">Beverage</option>
+                    {% for category_value, category_label in form.category.field.choices %}
+                        <option value="{{ category_value }}">{{ category_label }}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="form-field">
@@ -41,8 +38,40 @@
             </div>
 
             <button type="submit" class="form-button">Submit</button>
+
         </form>
     </div>
-
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const recipeForm = document.getElementById('recipe-form');
+        
+            recipeForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission behavior
+        
+                // Serialize form data
+                const formData = new FormData(recipeForm);
+        
+                // Submit form via AJAX
+                fetch(recipeForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}' // Include CSRF token
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Redirect to ingredient form upon successful submission
+                        window.location.href = '/add_ingredients/';
+                    } else {
+                        console.error('Failed to submit form');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            });
+        });
+        </script>
 </body>
 </html>

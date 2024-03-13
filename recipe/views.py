@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Recipe
 from .forms.recipe_form import RecipeForm,IngredientForm, IngredientFormSet
 from django.urls import reverse
+from django.http import JsonResponse
 
 def home(request):
     recipes = Recipe.objects.all()
@@ -14,17 +15,23 @@ def recipe(request,recipe_id):
 def add_recipe(request):
     if request.method == 'POST':
         recipe_form = RecipeForm(request.POST)
-        ingredient_form_set = IngredientFormSet(request.POST)
-        if recipe_form.is_valid() and ingredient_form_set.is_valid():
-            recipe = recipe_form.save()
-            for form in ingredient_form_set:
-                ingredient = form.save(commit = False)
-                ingredient.recipe = recipe
-                ingredient.save()
-            return redirect(reverse('home'))
-            
+        if recipe_form.is_valid() :
+            recipe_form.save()
+            if request.is_ajax():
+                return JsonResponse({'success': True})
+            else:
+                return redirect('add_ingredients')
     else:
         recipe_form = RecipeForm()
-        ingredient_formset = IngredientFormSet()
-    return render(request=request,template_name='recipe_form.html',context={'recipe_form': recipe_form, 'ingredient_formset': ingredient_formset})
+    return render(request=request,template_name='recipe_form.html',context={'recipe_form': recipe_form})
+
+def add_recipe_ingredients(request):
+    if request.method == 'POST':
+        ingredient_form = IngredientForm(request.POST)
+        if ingredient_form.is_valid() :
+            ingredient_form.save()
+            return redirect('add_ingredients')
+    else:
+        ingredient_form = RecipeForm()
+    return render(request=request,template_name='ingredient_form.html',context={'ingredient_form': ingredient_form})
         
