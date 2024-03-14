@@ -18,10 +18,11 @@
             <p><strong>Time Cooked:</strong> {{ recipe.time_cooked }} minutes</p>
             <h2>Ingredients</h2>
             <ul>
-                {% for ingredient in recipe.ingredients.all %}
+                {% for ingredient in ingredients %}
                     <li>{{ ingredient.name }} - {{ ingredient.quantity }} {{ ingredient.unit }}</li>
                 {% endfor %}
             </ul>
+            <a href= "{% url 'add_ingredients' recipe.id %}" class="add-ingredient">add ingredient</a>
         </div>
     </div>
 </body>

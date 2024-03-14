@@ -10,7 +10,7 @@
 <body>
     <div class="form-container">
         <h1>Add Recipe</h1>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post"  enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-field">
                 <label for="id_name" class="form-label">Recipe Name:</label>
@@ -27,8 +27,8 @@
             <div class="form-field">
                 <label for="id_category" class="form-label">Category:</label>
                 <select id="id_category" name="category" class="form-input">
-                    {% for category_value, category_label in form.category.field.choices %}
-                        <option value="{{ category_value }}">{{ category_label }}</option>
+                    {% for value, label in recipe_form.fields.category.choices %}
+                        <option value="{{ value }}">{{ label }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -41,37 +41,5 @@
 
         </form>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const recipeForm = document.getElementById('recipe-form');
-        
-            recipeForm.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent default form submission behavior
-        
-                // Serialize form data
-                const formData = new FormData(recipeForm);
-        
-                // Submit form via AJAX
-                fetch(recipeForm.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-CSRFToken': '{{ csrf_token }}' // Include CSRF token
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        // Redirect to ingredient form upon successful submission
-                        window.location.href = '/add_ingredients/';
-                    } else {
-                        console.error('Failed to submit form');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            });
-        });
-        </script>
 </body>
 </html>

@@ -19,8 +19,8 @@
             <div class="form-group">
                 <label for="id_unit">Unit:</label>
                 <select id="id_unit" name="unit">
-                    {% for unit in form.unit.field.choices %}
-                        <option value="{{ unit.0 }}">{{ unit.1 }}</option>
+                    {% for value, label in ingredient_form.fields.unit.choices %}
+                        <option value="{{ value }}">{{ label }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -31,10 +31,6 @@
             <div class="form-group">
                 <label for="id_optional">Optional:</label>
                 <input type="checkbox" id="id_optional" name="optional">
-            </div>
-            <div class="form-group">
-                <label for="id_recipe">Recipe:</label>
-                <input type="text" id="id_name" name="name">
             </div>
             <button type="submit">Submit</button>
         </form>
