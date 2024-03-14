@@ -50,3 +50,18 @@
     list-style-type: disc; 
     color: #0a0808; 
 }
+
+.recipe-content .add-ingredient {
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+    color: #fefefe;
+    text-decoration: none; 
+    font-weight: bold; 
+    font-family: 'Roboto', sans-serif;
+    background-color: rgba(51, 49, 49, 0.5); 
+}
+
+.recipe-content .add-ingredient:hover {
+    background-color: rgba(51, 49, 49, 0.7); 
+}
