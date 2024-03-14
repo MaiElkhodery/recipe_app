@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Recipe</title>
+    <link rel="stylesheet" href="{% static 'recipe_form_style.css' %}"> 
+</head>
+<body>
+    <div class="form-container">
+        <h1>Add Recipe</h1>
+        <form method="post"  enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-field">
+                <label for="id_name" class="form-label">Recipe Name:</label>
+                <input type="text" id="id_name" name="name" class="form-input">
+            </div>
+            <div class="form-field">
+                <label for="id_picture" class="form-label">Picture:</label>
+                <input type="file" id="id_picture" name="picture" accept="image/*" class="form-input">
+            </div>
+            <div class="form-field">
+                <label for="id_description" class="form-label">Description:</label>
+                <textarea id="id_description" name="description" class="form-input"></textarea>
+            </div>
+            <div class="form-field">
+                <label for="id_category" class="form-label">Category:</label>
+                <select id="id_category" name="category" class="form-input">
+                    {% for value, label in recipe_form.fields.category.choices %}
+                        <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="id_time_cooked" class="form-label">Time Cooked (minutes):</label>
+                <input type="number" id="id_time_cooked" name="time_cooked" class="form-input">
+            </div>
+
+            <button type="submit" class="form-button">Submit</button>
+
+        </form>
+    </div>
+</body>
+</html>

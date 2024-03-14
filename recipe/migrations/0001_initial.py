@@ -30,8 +30,7 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('picture', models.ImageField(upload_to='media/')),
                 ('category', models.CharField(max_length=50)),
-                ('time_cooked', models.IntegerField()),
-                ('ingredients', models.ManyToManyField(related_name='recipes', to='recipe.ingredient')),
+                ('time_cooked', models.IntegerField())
             ],
         ),
     ]

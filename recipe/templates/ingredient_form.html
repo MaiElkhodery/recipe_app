@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredient Form</title>
+    <link rel="stylesheet" href="{% static 'ingredient_form_style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Ingredient Form</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_name">Name:</label>
+                <input type="text" id="id_name" name="name">
+            </div>
+            <div class="form-group">
+                <label for="id_unit">Unit:</label>
+                <select id="id_unit" name="unit">
+                    {% for value, label in ingredient_form.fields.unit.choices %}
+                        <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="id_quantity">Quantity:</label>
+                <input type="number" id="id_quantity" name="quantity" step="1">
+            </div>
+            <div class="form-group">
+                <label for="id_optional">Optional:</label>
+                <input type="checkbox" id="id_optional" name="optional">
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

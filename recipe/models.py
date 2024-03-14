@@ -1,27 +1,50 @@
 from django.db import models
 
-
-class Ingredient(models.Model):
-    name = models.CharField(max_length=100)
-    quantity = models.FloatField(max_length=200)
-    optional = models.BooleanField(default = False)
-    unit = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.name
 class Recipe(models.Model):
+    CATEGORY_CHOICES = [
+        ('dessert', 'Dessert'),
+        ('salad', 'Salad'),
+        ('appetizer', 'Appetizer'),
+        ('main_course', 'Main Course'),
+        ('side_dish', 'Side Dish'),
+        ('beverage', 'Beverage')
+    ]
     name = models.CharField(max_length=100)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    picture = models.ImageField(upload_to = "media/",blank=False,null=False)
-    category = models.CharField(max_length=50)
+    picture = models.ImageField(upload_to = "media/",null=True)
+    category = models.CharField(max_length=50,choices = CATEGORY_CHOICES)
     time_cooked = models.IntegerField()
-    ingredients = models.ManyToManyField(Ingredient,related_name='recipes')
 
     def __str__(self):
         return self.name
+class Ingredient(models.Model):
+    UNITS = [
+            ('Grams', 'Grams'),
+            ('Kilograms', 'Kilograms'),
+            ('Milliliters', 'Milliliters'),
+            ('Liters', 'Liters'),
+            ('Teaspoons', 'Teaspoons'),
+            ('Tablespoons', 'Tablespoons'),
+            ('Cups', 'Cups'),
+            ('Ounces', 'Ounces'),
+            ('Pounds', 'Pounds'),
+            ('Pieces', 'Pieces'),
+            ('Slices', 'Slices'),
+            ('Cloves', 'Cloves'),
+            ('Pinches', 'Pinches'),
+            ('Handfuls', 'Handfuls'),
+            ('Drops', 'Drops'),
+    ]
+    name = models.CharField(max_length=70)
+    unit = models.CharField(max_length=100,choices=UNITS)
+    quantity = models.FloatField(default=5)
+    optional = models.BooleanField(default = False)  
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE,null=True)
 
 
+    def __str__(self):
+        return f'{self.quantity} {self.unit} {self.name}'
 
-     
+    
 
