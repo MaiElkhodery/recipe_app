@@ -12,10 +12,9 @@ class Recipe(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    picture = models.ImageField(upload_to = "media/",blank=True,null=True)
+    picture = models.ImageField(upload_to = "media/",null=True)
     category = models.CharField(max_length=50,choices = CATEGORY_CHOICES)
     time_cooked = models.IntegerField()
-    # ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE,default=0)       
 
     def __str__(self):
         return self.name
@@ -38,7 +37,7 @@ class Ingredient(models.Model):
             ('Drops', 'Drops'),
     ]
     name = models.CharField(max_length=70)
-    unit = models.CharField(max_length=20,choices=UNITS)
+    unit = models.CharField(max_length=100,choices=UNITS)
     quantity = models.FloatField(default=5)
     optional = models.BooleanField(default = False)  
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE,null=True)
